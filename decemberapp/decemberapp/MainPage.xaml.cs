@@ -13,6 +13,7 @@ namespace decemberapp
         double Nombre2;
         String Signe;
         bool IsFinish;
+        bool IsCalculContinue;
 
         public MainPage()
         {
@@ -24,7 +25,6 @@ namespace decemberapp
             NewCalcul();
             InProgress.Text = InProgress.Text + "1";
             Result.Text = Result.Text + "1";
-
         }
 
         void TwoClicked(object sender, EventArgs e)
@@ -81,7 +81,6 @@ namespace decemberapp
             NewCalcul();
             InProgress.Text = InProgress.Text + "9";
             Result.Text = Result.Text + "9";
-
         }
 
         void ZeroClicked(object sender, EventArgs e)
@@ -94,14 +93,23 @@ namespace decemberapp
         void PercentageClicked(object sender, EventArgs e)
         {
 
-            if (InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
                 return;
+            CalculContinue();
             InProgress.Text = InProgress.Text + "÷";
             if (Result.Text == string.Empty)
                 return;
             try
             {
-                Nombre1 = double.Parse(Result.Text);
+                if (IsCalculContinue)
+                {
+                    Nombre2 = double.Parse(Result.Text);
+                }
+                else
+                {
+                    Nombre1 = double.Parse(Result.Text);
+                    IsCalculContinue = true;
+                }
                 Signe = "÷";
             }
             catch { }
@@ -111,46 +119,56 @@ namespace decemberapp
 
         void LessClicked(object sender, EventArgs e)
         {
-            if (InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
                 return;
+            CalculContinue();
             InProgress.Text = InProgress.Text + "-";
             if (Result.Text == string.Empty)
                 return;
 
             try
             {
-                Nombre1 = double.Parse(Result.Text);
+                if (IsCalculContinue)
+                {
+                    Nombre2 = double.Parse(Result.Text);
+                }
+                else
+                {
+                    Nombre1 = double.Parse(Result.Text);
+                    IsCalculContinue = true;
+                }
                 Signe = "-";
             }
             catch { }
 
             Result.Text = String.Empty;
-
-
-
-
         }
-
-
 
         void PlusClicked(object sender, EventArgs e)
         {
-            if (InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
                 return;
+            CalculContinue();
             InProgress.Text = InProgress.Text + "+";
             if (Result.Text == string.Empty)
                 return;
 
             try
             {
-                Nombre1 = double.Parse(Result.Text);
+               if (IsCalculContinue)
+                {
+                    Nombre2 = double.Parse(Result.Text);                     
+                }
+                else
+                {
+                    Nombre1 = double.Parse(Result.Text);
+                    IsCalculContinue = true;
+                }
                 Signe = "+";
             }
             catch { }
 
-
             Result.Text = String.Empty;
-
         }
 
         void CommaClicked(object sender, EventArgs e)
@@ -162,72 +180,77 @@ namespace decemberapp
 
         void CalculClicked(object sender, EventArgs e)
         {
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+                return;
             InProgress.Text = InProgress.Text + "=";
-            try
-            {
-                Nombre2 = double.Parse(Result.Text);
-            }
-            catch { }
 
+            CalculContinue();
+            IsFinish = true;
+            Result.Text = Nombre1.ToString();
+        }
+
+        void CalculContinue()
+        {
             double.TryParse(Result.Text, out Nombre2);
 
             switch (Signe)
             {
                 case "+":
-                    Result.Text = (Nombre1 + Nombre2).ToString();
+                    Nombre1 = (Nombre1 + Nombre2);
                     break;
-
                 case "x":
-                    Result.Text = (Nombre1 * Nombre2).ToString();
+                    Nombre1 = (Nombre1 * Nombre2);
                     break;
-
                 case "-":
-                    Result.Text = (Nombre1 - Nombre2).ToString();
+                    Nombre1 = (Nombre1 - Nombre2);
                     break;
-
                 case "÷":
-                    Result.Text = (Nombre1 / Nombre2).ToString();
+                    Nombre1 = (Nombre1 / Nombre2);
                     break;
-
                 case "^":
-                    //var number = Nombre1;
-                    //for (int i = 0; i < Nombre2; i++)
-                    //    {
-                    //    Nombre1 = number + Nombre1;
-                    //    }
                     Nombre1 = Math.Pow(Nombre1, Nombre2);
-                    Result.Text = Nombre1.ToString();
                     break;
-                    Result.Text = String.Empty;
             }
-
-            IsFinish = true;
-
+            Nombre2 = 0;
+            Signe = String.Empty;
+            if (IsCalculContinue)
+            InProgress.Text = Nombre1.ToString();
         }
 
         void MultiplyClicked(object sender, EventArgs e)
         {
-            if (InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
                 return;
+            CalculContinue();
             InProgress.Text = InProgress.Text + "x";
-
 
             try
             {
-                Nombre1 = double.Parse(Result.Text);
+                if (IsCalculContinue)
+                {
+                    Nombre2 = double.Parse(Result.Text);                     
+                }
+                else
+                {
+                    Nombre1 = double.Parse(Result.Text);
+                    IsCalculContinue = true;
+                }
                 Signe = "x";
             }
             catch { }
-
-
 
             Result.Text = String.Empty;
         }
 
         void ClearClicked(object sender, EventArgs e)
         {
-            InProgress.Text = String.Empty;
+            IsFinish = false;
+            Nombre1 = 0;
+            Nombre2 = 0;
+            Signe = String.Empty;
             Result.Text = String.Empty;
+            InProgress.Text = String.Empty;
+            IsCalculContinue = false;
         }
 
         void NewCalcul()
@@ -240,29 +263,33 @@ namespace decemberapp
                 Signe = String.Empty;
                 Result.Text = String.Empty;
                 InProgress.Text = String.Empty;
+                IsCalculContinue = false;
             }
         }
 
         void PowerClicked(object sender, EventArgs e)
         {
-            if (InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
+            if (InProgress.Text == null || InProgress.Text == string.Empty || InProgress.Text.Last() == 'x' || InProgress.Text.Last() == '+' || InProgress.Text.Last() == '-' || InProgress.Text.Last() == '÷' || InProgress.Text.Last() == '^')
                 return;
+            CalculContinue();
             InProgress.Text = InProgress.Text + "^";
-
-            
 
             try
             {
-                Nombre1 = double.Parse(Result.Text);
+                if (IsCalculContinue)
+                {
+                    Nombre2 = double.Parse(Result.Text);
+                }
+                else
+                {
+                    Nombre1 = double.Parse(Result.Text);
+                    IsCalculContinue = true;
+                }
                 Signe = "^";
             }
             catch { }
 
             Result.Text = String.Empty;
-
-         
-
         }
     }
 }
-
