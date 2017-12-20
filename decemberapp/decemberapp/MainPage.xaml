@@ -43,14 +43,14 @@
         <Button x:Name="Eight" Text="8" Grid.Row="2" Grid.Column="1" BackgroundColor="#E6E6E6" FontSize="20"  Clicked="EightClicked" TextColor="Black"/>
         <Button x:Name="Nive" Text="9" Grid.Row="2" Grid.Column="2" BackgroundColor="#E6E6E6" FontSize="20"  Clicked="NineClicked" TextColor="black"/>
         <Button x:Name="Zero" Text="0" Grid.Row="5" Grid.Column="1" BackgroundColor="#E6E6E6" FontSize="20"  Clicked="ZeroClicked" TextColor="black"/>
-        <Button x:Name="Multiply" Text="x" Grid.Row="2" Grid.Column="3" BackgroundColor="#FAAC58"  FontSize="16" Clicked="MultiplyClicked" TextColor="black"/>
-        <Button x:Name="Percentage" Text="÷" Grid.Row="3" Grid.Column="3" BackgroundColor="#FAAC58" FontSize="28"  Clicked="PercentageClicked" TextColor="black"/>
-        <Button x:Name="Less" Text="-" Grid.Row="4" Grid.Column="3" BackgroundColor="#FAAC58" FontSize="35" Clicked="LessClicked" TextColor="black"/>
-        <Button x:Name="Plus" Text="+" Grid.Row="5" Grid.Column="3" BackgroundColor="#FAAC58" FontSize="25" Clicked="PlusClicked" TextColor="black"/>
+        <Button x:Name="Multiply" Text="x" Grid.Row="2" Grid.Column="3" BackgroundColor="#A4A4A4"  FontSize="16" Clicked="MultiplyClicked" TextColor="black"/>
+        <Button x:Name="Percentage" Text="÷" Grid.Row="3" Grid.Column="3" BackgroundColor="#A4A4A4" FontSize="28"  Clicked="PercentageClicked" TextColor="black"/>
+        <Button x:Name="Less" Text="-" Grid.Row="4" Grid.Column="3" BackgroundColor="#A4A4A4" FontSize="35" Clicked="LessClicked" TextColor="black"/>
+        <Button x:Name="Plus" Text="+" Grid.Row="5" Grid.Column="3" BackgroundColor="#A4A4A4" FontSize="25" Clicked="PlusClicked" TextColor="black"/>
         <Button x:Name="Comma" Text="," Grid.Row="5" Grid.Column="2" BackgroundColor="#E6E6E6" FontSize="20" Clicked="CommaClicked" TextColor="black"/>
         <Button x:Name="Clear" Text="AC" Grid.Row="5" Grid.Column="0" BackgroundColor="#E6E6E6" FontSize="18" Clicked="ClearClicked" TextColor="black"/>
-        <Button x:Name="Calcul" Text="=" Grid.Row="6" Grid.ColumnSpan="3" BackgroundColor="#FF8000" FontSize="39" Clicked="CalculClicked" TextColor="black"/>
-        <Button x:Name="power" Text="^" Grid.Row="6" Grid.Column="3" BackgroundColor="#FAAC58" FontSize="30" Clicked="PowerClicked" TextColor="black"/>
+        <Button x:Name="Calcul" Text="=" Grid.Row="6" Grid.ColumnSpan="3" BackgroundColor="#000000" FontSize="39" Clicked="CalculClicked" TextColor="White"/>
+        <Button x:Name="power" Text="^" Grid.Row="6" Grid.Column="3" BackgroundColor="#A4A4A4" FontSize="30" Clicked="PowerClicked" TextColor="black"/>
         
         <Label x:Name="Result" Grid.Row="1" Grid.ColumnSpan="4" FontSize="45" HorizontalOptions="End" VerticalOptions="End" FontAttributes="Bold"/>
 
